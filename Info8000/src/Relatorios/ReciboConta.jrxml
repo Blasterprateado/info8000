@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="99" columnWidth="222" leftMargin="2" rightMargin="2" topMargin="0" bottomMargin="0" uuid="83b51ded-fd1a-4c15-99c6-09238daf8c98">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     contaspagar.`id` AS contaspagar_id,
+     contaspagar.`descricao` AS contaspagar_descricao,
+     contaspagar.`data` AS contaspagar_data,
+     contaspagar.`situacao` AS contaspagar_situacao,
+     contaspagar.`valor` AS contaspagar_valor
+FROM
+     `contaspagar` contaspagar
+where contaspagar.id=$P{id}]]>
+	</queryString>
+	<field name="contaspagar_id" class="java.lang.Integer"/>
+	<field name="contaspagar_descricao" class="java.lang.String"/>
+	<field name="contaspagar_data" class="java.sql.Date"/>
+	<field name="contaspagar_situacao" class="java.lang.Integer"/>
+	<field name="contaspagar_valor" class="java.lang.Double"/>
+	<title>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement x="51" y="70" width="165" height="13" uuid="ff7af760-8413-4b2a-a6f7-11a01dd1f7f6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="216" height="20" uuid="2713be57-4e86-4389-a2f1-d2ac98c156ed"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo de Contas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="216" height="16" uuid="34d287a7-e2a0-4410-b95f-0a38a18f615a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="50" width="91" height="20" uuid="7f91f3ec-9073-4cfe-aea9-6c8963b8a65d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Vencimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="51" height="13" uuid="afa9c769-fa7d-4fbe-ae4b-8df6070b0240"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="39" y="37" width="152" height="13" uuid="7bab74d1-8701-4c59-ad69-107884a9e34f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="50" width="125" height="20" uuid="c06fbf01-488c-4b2c-b70d-0579d69dfa86"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_data}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="37" width="36" height="13" uuid="02b337bf-b3a0-439f-a519-b28aa44ec01d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="51" height="16" uuid="ebdf5b2e-cca5-4d6e-a4cb-163cea06acd1"/>
+				<text><![CDATA[Assinatura:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="56" y="94" width="160" height="1" uuid="d356a40f-3de5-45e7-9cf3-d011078e901d"/>
+			</line>
+		</band>
+	</title>
+</jasperReport>

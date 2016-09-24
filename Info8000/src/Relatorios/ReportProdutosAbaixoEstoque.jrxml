@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="48072070-3579-4fcf-8000-d723bf0fca81">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     produtos.`id` AS produtos_id,
+     produtos.`descricao` AS produtos_descricao,
+     produtos.`preco_compra` AS produtos_preco_compra,
+     produtos.`preco_venda` AS produtos_preco_venda,
+     produtos.`qtd_estoque` AS produtos_qtd_estoque,
+     produtos.`estoque_minimo` AS produtos_estoque_minimo,
+     produtos.`classe` AS produtos_classe,
+     produtos.`marca` AS produtos_marca,
+     produtos.`fornecedor` AS produtos_fornecedor,
+     produtos.`codbarras` AS produtos_codbarras
+FROM
+     `produtos` produtos
+where produtos.qtd_estoque<produtos.estoque_minimo
+order by fornecedor]]>
+	</queryString>
+	<field name="produtos_id" class="java.lang.Integer"/>
+	<field name="produtos_descricao" class="java.lang.String"/>
+	<field name="produtos_preco_compra" class="java.lang.Double"/>
+	<field name="produtos_preco_venda" class="java.lang.Double"/>
+	<field name="produtos_qtd_estoque" class="java.lang.Double"/>
+	<field name="produtos_estoque_minimo" class="java.lang.Double"/>
+	<field name="produtos_classe" class="java.lang.String"/>
+	<field name="produtos_marca" class="java.lang.String"/>
+	<field name="produtos_fornecedor" class="java.lang.String"/>
+	<field name="produtos_codbarras" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="30" backcolor="#6666FF" uuid="68760d57-ef57-48aa-aaed-b5f4cb0a7f79"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="7" width="553" height="20" forecolor="#FFFFFF" uuid="85223cf8-af1c-4268-8f8f-90aa9fd1592c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Produtos Abaixo Do Estoque]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="0" width="100" height="20" uuid="51ea9c1c-0f17-447e-964f-5e47d751d52b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="0" width="100" height="20" uuid="4ea4eef2-96c0-4318-b648-78c654f8980d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="0" width="100" height="20" uuid="c8c83f3e-0423-4982-a5f8-a4893607e0a5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd Minimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="2" width="100" height="20" uuid="6eb0451b-5866-4602-bf14-0d5b13b8297f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fornecedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="2" width="100" height="20" uuid="eaeabc34-4dad-4bf6-a239-8948a20de754"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="149" height="20" uuid="864f8ee8-5086-4b2b-aa9a-87025b739648"/>
+				<textFieldExpression><![CDATA[$F{produtos_descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="0" width="100" height="20" uuid="19bd4db1-7ce0-4986-a95f-1c0fef6b203a"/>
+				<textFieldExpression><![CDATA[$F{produtos_qtd_estoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="0" width="100" height="20" uuid="33f69d56-f224-4b0a-9219-1e32f39b3b53"/>
+				<textFieldExpression><![CDATA[$F{produtos_estoque_minimo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="0" width="100" height="20" uuid="3cdb555c-2ec9-4b38-a091-1e942a1a5e78"/>
+				<textFieldExpression><![CDATA[$F{produtos_fornecedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="100" height="20" uuid="cd108f2a-717c-4402-a571-7401a507c8c1"/>
+				<textFieldExpression><![CDATA[$F{produtos_marca}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="d7901cc0-d258-41db-9caf-9856d9559724"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

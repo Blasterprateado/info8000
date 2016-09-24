@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ba98263-0c69-405f-92b5-e0cbc71b9421">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataIni" class="java.lang.String"/>
+	<parameter name="dataFim" class="java.lang.String"/>
+	<parameter name="situacao" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     contaspagar.`id` AS contaspagar_id,
+     contaspagar.`descricao` AS contaspagar_descricao,
+     contaspagar.`data` AS contaspagar_data,
+     contaspagar.`situacao` AS contaspagar_situacao,
+     contaspagar.`valor` AS contaspagar_valor
+FROM
+     `contaspagar` contaspagar
+WHERE Date(contaspagar.data) between $P{dataIni} and $P{dataFim} and contaspagar.situacao=$P{situacao}]]>
+	</queryString>
+	<field name="contaspagar_id" class="java.lang.Integer"/>
+	<field name="contaspagar_descricao" class="java.lang.String"/>
+	<field name="contaspagar_data" class="java.sql.Date"/>
+	<field name="contaspagar_situacao" class="java.lang.Integer"/>
+	<field name="contaspagar_valor" class="java.lang.Double"/>
+	<variable name="contaspagar_valor_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{contaspagar_valor}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="28" uuid="1049cf51-9e4f-43da-be70-3082e1d84101"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio de contas a pagar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="27" width="26" height="20" uuid="66e696bf-7fe1-417e-a3be-113f72532088"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="27" width="51" height="20" uuid="e9115a9c-e32c-47e3-9958-c6a54ace971f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="27" width="100" height="20" uuid="c677c00f-c9fc-44e0-9d33-21734f1e0fcf"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataIni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="27" width="100" height="20" uuid="561f61a0-1346-4132-a189-44b80f6d831e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataFim}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="16" uuid="6dac651d-6750-4ea4-a8e8-ad4aa9c73094"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="0" width="119" height="16" uuid="c3f001aa-ae4a-4d84-83cd-e0e90217eeab"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="0" width="124" height="16" uuid="2fcba5e8-4e8d-4e37-a91b-24c6280c5f29"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Vencimento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="16" width="553" height="6" uuid="d977a9a6-ba19-4bd0-b412-c0f0e0ce12a5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="553" height="20" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="fddcca08-6cae-4d1b-a08a-01324106b2bf">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue()%2)==0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="255" height="20" uuid="e16d3933-2319-450d-861f-0dd78b5a7eb2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="261" y="0" width="119" height="20" uuid="9e203977-cc1b-4aaa-b285-bdbbf3855b57"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_valor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="423" y="0" width="124" height="20" uuid="31455c42-09a8-4f70-b9f0-dff99b22473a"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contaspagar_data}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="20" uuid="e884c55e-ec8c-4837-a618-3cb0d39f363c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total no Periodo Selecionado:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="180" y="0" width="100" height="20" forecolor="#FF0000" uuid="f37df8b1-3565-4da5-bc76-c62cb5de4e84"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contaspagar_valor_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
