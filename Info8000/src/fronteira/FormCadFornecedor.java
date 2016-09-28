@@ -67,7 +67,12 @@ public void AbilidaOuDesabilitaBotoes(){
         }
     }    
     public void PreencheTabela(){
-        modelCombo = new ComboBoxCidade();
+            try {
+            modelCombo   = new ComboBoxCidade(new CidadeBD().getListaCidade());
+        } catch (Exception ex) {
+            Logger.getLogger(FormCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         ComboCidade.setModel(modelCombo);
         listaFornecedor = bd.GetListaFornecedor();
         model = new TabelaFornecedor(listaFornecedor);

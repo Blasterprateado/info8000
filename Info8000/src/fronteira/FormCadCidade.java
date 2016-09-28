@@ -34,6 +34,12 @@ List<Cidade> listacidade;
         Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
     }
     preencheTabela();
+    btnAlterar.setEnabled(true);
+    btnExcluir.setEnabled(true);
+    btnSalvar.setEnabled(false);
+    btnCancelar.setEnabled(false);
+        abilidaOuDesabilitaCampos(false);
+    btnNew.setEnabled(true);
     }
 private void preencheTabela(){
     try {
@@ -192,6 +198,8 @@ private void preencheTabela(){
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
 
+        edtID.setEditable(false);
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("CEP:");
 
@@ -222,19 +230,15 @@ private void preencheTabela(){
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(edtID, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                            .addComponent(edtNomeUf)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(edtCep)))
+                    .addComponent(edtCep, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(edtID, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(edtNomeUf))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -259,19 +263,20 @@ private void preencheTabela(){
                     .addComponent(edtID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(edtCodUf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(edtNomeUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(edtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(edtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(edtCodIBGE, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(edtCodIBGE, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(edtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -280,6 +285,11 @@ private void preencheTabela(){
         btnNew.setBackground(new java.awt.Color(255, 255, 255));
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar.png"))); // NOI18N
         btnNew.setText("Novo");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirma.png"))); // NOI18N
@@ -293,14 +303,29 @@ private void preencheTabela(){
         btnAlterar.setBackground(new java.awt.Color(255, 255, 255));
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Editar.gif"))); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lixeira.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -367,6 +392,7 @@ private void preencheTabela(){
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(cidade==null){
            cidade = new Cidade();
+           preencheCidade();
            try {
                cidadeBD.adicionarCidade(cidade);
                JOptionPane.showMessageDialog(this, "Cidade adicionada com sucesso");
@@ -374,7 +400,7 @@ private void preencheTabela(){
                Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
                JOptionPane.showMessageDialog(this, "Erro ao Adicionar Cidade "+ex);
            }
-         preencheCidade();
+         
        }else if(cidade!=null){
          cidade= preencheCidade();
            try {
@@ -385,6 +411,24 @@ private void preencheTabela(){
                JOptionPane.showMessageDialog(this, "Erro ao atualizar Cidade " + ex);
            }
        }
+        btnAlterar.setEnabled(true);
+    btnExcluir.setEnabled(true);
+    btnSalvar.setEnabled(false);
+    btnCancelar.setEnabled(false);
+    btnNew.setEnabled(true);
+     try {
+        listacidade = cidadeBD.getListaCidade();
+    } catch (Exception ex) {
+        Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    preencheTabela();
+ edtCep.setText("");
+        edtCodIBGE.setText("");
+        edtCodUf.setText("");
+        edtNomeCidade.setText("");
+        edtNomeUf.setText("");
+        edtID.setText("");
+        abilidaOuDesabilitaCampos(false);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void edtNomeCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeCidadeActionPerformed
@@ -396,7 +440,17 @@ private void preencheTabela(){
           if(edtBuscaCidade.getText().isEmpty()==false){
           listacidade.clear();
           try {
-              listacidade.add(cidadeBD.getListaCidadeBYNOME(edtBuscaCidade.getText()));
+              Cidade cidade = cidadeBD.getListaCidadeBYNOME(edtBuscaCidade.getText());
+              if(cidade.getId()!=0){
+              listacidade.add(cidade);
+              }else{
+                  JOptionPane.showMessageDialog(this, "Nenhuma Cidade encontrada com os filtros utilizados");
+                  try {
+                  listacidade = cidadeBD.getListaCidade();
+              } catch (Exception ex) {
+                  Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              }
           } catch (Exception ex) {
               Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -418,7 +472,18 @@ private void preencheTabela(){
           if(edtBuscaCep.getText().isEmpty()==false){
           listacidade.clear();
           try {
-              listacidade.add(cidadeBD.getListaCidadeBYCEP(edtBuscaCep.getText()));
+               Cidade cidade = cidadeBD.getListaCidadeBYCEP(edtBuscaCep.getText());
+             if(cidade.getId()!=0){
+              listacidade.add(cidade);
+              }else{
+                  JOptionPane.showMessageDialog(this, "Nenhuma Cidade encontrada com os filtros utilizados");
+                  try {
+                  listacidade = cidadeBD.getListaCidade();
+              } catch (Exception ex) {
+                  Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              }
+            
           } catch (Exception ex) {
               Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -440,7 +505,19 @@ private void preencheTabela(){
           if(edtBuscaIbge.getText().isEmpty()==false){
           listacidade.clear();
           try {
-              listacidade.add(cidadeBD.getListaCidadeBYCODIBGE(edtBuscaIbge.getText()));
+               Cidade cidade = cidadeBD.getListaCidadeBYCODIBGE(edtBuscaIbge.getText());
+              if(cidade.getId()!=0){
+              listacidade.add(cidade);
+              }else{
+                  JOptionPane.showMessageDialog(this, "Nenhuma Cidade encontrada com os filtros utilizados");
+                  try {
+                  listacidade = cidadeBD.getListaCidade();
+              } catch (Exception ex) {
+                  Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              }
+            
+              
           } catch (Exception ex) {
               Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -456,7 +533,131 @@ private void preencheTabela(){
          preencheTabela();
       }        // TODO add your handling code here:
     }//GEN-LAST:event_edtBuscaIbgeKeyPressed
-    
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+       alterar();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       btnAlterar.setEnabled(true);
+    btnExcluir.setEnabled(true);
+    btnSalvar.setEnabled(false);
+    btnCancelar.setEnabled(false);
+    btnNew.setEnabled(true);
+    edtCep.setText("");
+        edtCodIBGE.setText("");
+        edtCodUf.setText("");
+        edtNomeCidade.setText("");
+        edtNomeUf.setText("");
+        edtID.setText("");
+        abilidaOuDesabilitaCampos(false);
+    preencheTabela();
+     try {
+        listacidade = cidadeBD.getListaCidade();
+    } catch (Exception ex) {
+        Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+private void abilidaOuDesabilitaCampos(boolean bo){
+    edtCep.setEnabled(bo);
+        edtCodIBGE.setEnabled(bo);
+        edtCodUf.setEnabled(bo);
+        edtNomeCidade.setEnabled(bo);
+        edtNomeUf.setEnabled(bo);
+}
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+       btnAlterar.setEnabled(false);
+    btnExcluir.setEnabled(false);
+    btnSalvar.setEnabled(true);
+    btnCancelar.setEnabled(true);
+    btnNew.setEnabled(false);
+    cidade= null;
+    preencheTabela();
+        abilidaOuDesabilitaCampos(true);
+       
+     edtCep.setText("");
+        edtCodIBGE.setText("");
+        edtCodUf.setText("");
+        edtNomeCidade.setText("");
+        edtNomeUf.setText("");
+        edtID.setText("");
+        
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       
+            int linhaSelecionada = -1;
+            
+            linhaSelecionada = tableCidade.getSelectedRow();
+            if (linhaSelecionada >= 0) {  
+                 if (JOptionPane.showConfirmDialog(this, "Confirma Exclusão?","Confirma Exclusão?",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+                int idCidade = (int) tableCidade.getValueAt(linhaSelecionada, 5);
+                
+                try {
+                    cidadeBD.removerCidade(idCidade);
+                    JOptionPane.showMessageDialog(this, "Cidade Excluida com sucesso.");
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                edtCep.setText("");
+                edtCodIBGE.setText("");
+                edtCodUf.setText("");
+                edtNomeCidade.setText("");
+                edtNomeUf.setText("");
+                edtID.setText("");
+                
+                btnAlterar.setEnabled(true);
+                btnExcluir.setEnabled(true);
+                btnSalvar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+                btnNew.setEnabled(true);
+                 try {
+        listacidade = cidadeBD.getListaCidade();
+    } catch (Exception ex) {
+        Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+    }
+                preencheTabela();
+                 }  
+            } else {
+                JOptionPane.showMessageDialog(null, "É necesário selecionar uma linha.");
+            }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+     public void alterar(){
+        int linhaSelecionada = -1;
+      Cidade cidade = null;
+        linhaSelecionada = tableCidade.getSelectedRow();
+        if (linhaSelecionada >= 0) { 
+            int idCliente = (int) tableCidade.getValueAt(linhaSelecionada, 5);
+          
+           
+            try {
+                cidade=cidadeBD.getListaCidadeBYID(idCliente);
+                this.cidade=cidade;
+            } catch (Exception ex) {
+                Logger.getLogger(FormCadCidade.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        edtCep.setText(cidade.getCep());
+        edtCodIBGE.setText(cidade.getCodMunicipio());
+        edtCodUf.setText(cidade.getCodUf());
+        edtNomeCidade.setText(cidade.getNome());
+        edtNomeUf.setText(cidade.getUf());
+        edtID.setText(String.valueOf(cidade.getId()));
+        
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnNew.setEnabled(false);
+        btnSalvar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        
+            abilidaOuDesabilitaCampos(true);
+          } 
+        else {
+            JOptionPane.showMessageDialog(null, "É necessario selecionar uma linha.");
+        }
+    }
     private Cidade preencheCidade(){
         cidade.setCep(edtCep.getText());
         cidade.setCodMunicipio(edtCodIBGE.getText());

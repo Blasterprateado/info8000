@@ -27,13 +27,18 @@ public class FormCadFuncionario extends javax.swing.JFrame {
     FuncionarioBD BD = new FuncionarioBD();
     int btnIncluirStatus=0;
     int btnAlterarStatus=0;
-    ComboBoxCidade modelCombo = new ComboBoxCidade();
+    ComboBoxCidade modelCombo ;
     /**
      * Creates new form FormCadFuncionario
      */
     public FormCadFuncionario() {
          initComponents();
          preencheTabela();
+           try {
+            modelCombo   = new ComboBoxCidade(new CidadeBD().getListaCidade());
+        } catch (Exception ex) {
+            Logger.getLogger(FormCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
          PanelGuia.setSelectedIndex(0);
          btnGravar.setEnabled(false);
          
@@ -43,7 +48,11 @@ public class FormCadFuncionario extends javax.swing.JFrame {
             listaFuncionario= BD.getListaFuncionario();
             model = new TabelaFuncionario(listaFuncionario);
             tabelaFuncionario.setModel(model);
-             modelCombo = new ComboBoxCidade();
+               try {
+            modelCombo   = new ComboBoxCidade(new CidadeBD().getListaCidade());
+        } catch (Exception ex) {
+            Logger.getLogger(FormCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
              ComboCidade.setModel(modelCombo);
         } catch (Exception ex) {
             Logger.getLogger(FormCadFuncionario.class.getName()).log(Level.SEVERE, null, ex);

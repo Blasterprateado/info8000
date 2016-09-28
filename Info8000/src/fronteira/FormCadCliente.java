@@ -29,7 +29,7 @@ public class FormCadCliente extends javax.swing.JFrame {
     int btnIncluirStatus=0;
     int btnAlterarStatus=0;
     Cliente cliente;
-    ComboBoxCidade combomodel = new ComboBoxCidade();
+    ComboBoxCidade combomodel ;
    
     
     
@@ -39,6 +39,11 @@ public class FormCadCliente extends javax.swing.JFrame {
     public FormCadCliente() {
         initComponents();
         preencheTabela();
+        try {
+            combomodel   = new ComboBoxCidade(new CidadeBD().getListaCidade());
+        } catch (Exception ex) {
+            Logger.getLogger(FormCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
        ComboCidade.setModel(combomodel);
        btnGravar.setEnabled(false);
        //AutoCompletion.enable(ComboCidade);

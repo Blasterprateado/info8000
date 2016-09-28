@@ -25,7 +25,7 @@ public class TabelaCidades extends AbstractTableModel{
 
 
     List<Cidade> linhas;
-    private String[] colunas = new String[]{"NOME CIDADE", "CEP","UF","COD UF","COD IBGE"};
+    private String[] colunas = new String[]{"NOME CIDADE", "CEP","UF","COD UF","COD IBGE","ID"};
     public TabelaCidades(List<Cidade> caixas) {
         this.linhas = new ArrayList<>(caixas);
     } 

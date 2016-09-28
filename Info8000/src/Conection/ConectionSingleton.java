@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  */
 public class ConectionSingleton {
 private static final String NOME_SERVIDOR = "localhost";//CINHO DO SERVIDOR DE BANCO DE DADOS
-    private static final String NOME_DA_BASE = "info8000";//NOME DO SEU BANCO DE DADOS
+    private static final String NOME_DA_BASE = "infofiscal";//NOME DO SEU BANCO DE DADOS
     private static final String URL_CONEXAO_BANCO = "jdbc:mysql://" + NOME_SERVIDOR + "/" + NOME_DA_BASE;//conexao com o banco
     private static final String NOME_DE_USUARIO = "root"; //nome de usuario do banco de dados
     private static final String SENHA_BANCO = ""; //Senha do banco de dados

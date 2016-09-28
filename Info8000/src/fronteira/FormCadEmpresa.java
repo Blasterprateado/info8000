@@ -25,13 +25,18 @@ public class FormCadEmpresa extends javax.swing.JFrame {
     int btnIncluirStatus=0;
     int btnAlterarStatus=0;
     Empresas empresa;
-    ComboBoxCidade combomodel = new ComboBoxCidade();
+    ComboBoxCidade combomodel ;
     /**
      * Creates new form FormCadCliente
      */
     
     public FormCadEmpresa() {
-        initComponents();        
+        initComponents();
+try {
+            combomodel   = new ComboBoxCidade(new CidadeBD().getListaCidade());
+        } catch (Exception ex) {
+            Logger.getLogger(FormCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }        
         preencheTabela();
         ComboCidade.setModel(combomodel);
         btnGravar.setEnabled(false);

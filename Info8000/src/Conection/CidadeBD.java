@@ -124,6 +124,32 @@ public class CidadeBD {
          throw new RuntimeException(e);
      }
 }
+    public List<Cidade> getListaCidadeBYCODUF(int CODUF) throws Exception {
+     try {
+         List<Cidade> lista = new ArrayList<>();
+          ConectionSingleton conexaosingleton = ConectionSingleton.getInstancia();
+         Connection connection = conexaosingleton.conectar();
+            PreparedStatement stmt = connection.prepareStatement("select * from cidades where uf=?");
+         stmt.setInt(1, CODUF);
+         ResultSet resultado = stmt.executeQuery();
+ 
+         while (resultado.next()) {
+             Cidade cidades = new Cidade();
+            cidades.setId(resultado.getInt("id"));
+             cidades.setNome(resultado.getString("NOME_MUNICIPIO"));
+             cidades.setUf(resultado.getString("NOME_UF"));
+             cidades.setCodUf(resultado.getString("UF"));
+                    cidades.setCep(resultado.getString("cep"));
+                    cidades.setCodMunicipio(resultado.getString("COD_MUNICIPIO_COMPLETO"));
+           lista.add(cidades);
+         }
+         resultado.close();
+         stmt.close();
+         return lista;
+     } catch (SQLException e) {
+         throw new RuntimeException(e);
+     }
+}
     public Cidade getListaCidadeBYCODIBGE(String CODIBGE) throws Exception {
      try {
           ConectionSingleton conexaosingleton = ConectionSingleton.getInstancia();
@@ -183,7 +209,7 @@ public class CidadeBD {
         ConectionSingleton conexaosingleton = ConectionSingleton.getInstancia();
          Connection connection = conexaosingleton.conectar();
 
-         String sql = "UPDATE cidades SET NOME_MUNICIPIO=?,NOME_UF=?,UF=?,cep=?,COD_MUNICIPIO_COMPLETO=? WHERE cidade.id=?";
+         String sql = "UPDATE cidades SET NOME_MUNICIPIO=?,NOME_UF=?,UF=?,cep=?,COD_MUNICIPIO_COMPLETO=? WHERE cidades.id=?";
  
      try {
          // prepared statement para inserção

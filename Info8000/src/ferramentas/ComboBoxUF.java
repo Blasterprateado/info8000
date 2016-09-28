@@ -6,8 +6,8 @@
 package ferramentas;
 
 
-import Conection.CidadeBD;
-import Objetos.Cidade;
+import Conection.UfBD;
+import Objetos.Uf;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,16 +19,19 @@ import javax.swing.ComboBoxModel;
  *
  * @author user
  */
-public class ComboBoxCidade extends AbstractListModel implements ComboBoxModel{
-    
-      List<Cidade> lista= new ArrayList<Cidade>();
-      Cidade produto ;
+public class ComboBoxUF extends AbstractListModel implements ComboBoxModel{
+    UfBD bd= new UfBD();
+      List<Uf> lista= new ArrayList<Uf>();
+      Uf produto ;
 
-    public ComboBoxCidade(List<Cidade> lista) {
-        
-            this.lista =lista;
+    public ComboBoxUF() {
+        try {
+            this.lista = bd.getlistUf();
             
-        
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ComboBoxUF.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @Override
     public int getSize() {
@@ -43,11 +46,7 @@ public class ComboBoxCidade extends AbstractListModel implements ComboBoxModel{
     @Override
     public void setSelectedItem(Object o) {
       
-          try {
-              produto=new CidadeBD().getListaCidadeBYNOME(o.toString());
-          } catch (Exception ex) {
-              Logger.getLogger(ComboBoxCidade.class.getName()).log(Level.SEVERE, null, ex);
-          }
+      produto=(Uf) o;
               
     }
 
